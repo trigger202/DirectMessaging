@@ -13,7 +13,7 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messsages', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('conversation_id')->foreign('conversation_id')->references('conversations')->on('id')->onDelete('cascade');
             $table->text('message');
@@ -29,6 +29,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messsages');
+        Schema::dropIfExists('messages');
     }
 }
