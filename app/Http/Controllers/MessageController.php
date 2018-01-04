@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Conversation;
 use App\Message;
+use App\User;
 
 
 class MessageController extends Controller
@@ -56,7 +57,9 @@ class MessageController extends Controller
 
             $message->save();
 
-            return view('/');
+           $friends=  User::all()->except(Auth::id());
+           $messageList = Message::all();
+           return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
 
 
 
