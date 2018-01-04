@@ -46,10 +46,13 @@
 			<textarea rows="5" name="message"></textarea>
 
 		</div>
+		<br>
 
-		<button type="submit">Send message</button>
+		<button type="submit" class="btn btn-info">Send message</button>
+		<br>
 	</form>
 
+		<br>
 
 	<div class="My messages list-group-item">
 		<h2>Recived Messages</h2>
@@ -61,7 +64,6 @@
 			@endforeach
 		</ul>
 	</div>
-
 
 </div>
 
