@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Message;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,9 +33,8 @@ class HomeController extends Controller
 
 
        $friends=  User::all()->except(Auth::id());
-
-        // dd($friends);
-        return view('message', ['friendsList'=>$friends]);
+       $messageList = Message::all();
+        return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
     }
 
 

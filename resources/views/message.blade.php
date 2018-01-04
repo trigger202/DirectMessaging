@@ -40,6 +40,16 @@
 	</form>
 
 
+	<div class="My messages">
+		<h2>Recived Messages</h2>
+		<ul>
+			@foreach($messageList as $message)
+				<li>{{$message->message}} - from </li>
+			@endforeach
+		</ul>
+	</div>
+
+
 </div>
 
 </body>

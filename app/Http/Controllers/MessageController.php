@@ -56,7 +56,7 @@ class MessageController extends Controller
 
             $message->save();
 
-            return redirect('message');
+            return view('/');
 
 
 
