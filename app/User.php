@@ -33,10 +33,10 @@ class User extends Authenticatable
         return $this->hasMany('App\conversation', 'user_one_id');
     }
 
-    public function message()
-    {
+    // public function message()
+    // {
 
-        return $this->hasMany('App\message', 'conversation_id');
-    }
+    //     return $this->belongsToMany('App\Message', 'conversation_id');
+    // }
 
 }

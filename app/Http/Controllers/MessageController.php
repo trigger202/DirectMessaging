@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 use Illuminate\Http\Request;
 use App\Conversation;
 use App\Message;
@@ -53,7 +55,7 @@ class MessageController extends Controller
             $conversation = new Conversation();
             $conversation->user_one_id=$user->id;
             $conversation->user_two_id=$request->friendid;
-            // $conversation->save();
+            $conversation->save();
 
             // dd($conversation->id);
             $message = new Message();
@@ -62,17 +64,15 @@ class MessageController extends Controller
             $message->message = $request->message;
             $message->conversation_id= $conversation->id;
 
-            // $message->save();
+            $message->save();
 
            $friends=  User::all()->except(Auth::id());
-           $messageList = Message::all();
 
-           var_dump($user->conversations->messages);
-           // var_dump($user->conversations);
-           dd();
+           $userConversationIDs = $user->conversations->pluck('id')->all();
 
+           $messageList = DB::table('messages')->whereIn ('conversation_id', $userConversationIDs)->orderBy('created_at','desc')->get();
 
-           // return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
+           return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
 
 
 

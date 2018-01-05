@@ -14,15 +14,9 @@ class Conversation extends Model
 
 
 
-    public function user()
+    public function Messages()
     {
-    	return $this->belongsTo('App\User');
+    	return $this->belongsToMany('App\Message');
     }
 
-    public function messages()
-    {
-
-    	return $this->hasMany('App\Message');
-
-    }
 }
