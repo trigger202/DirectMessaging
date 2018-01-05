@@ -13,4 +13,12 @@ class Message extends Model
 		return $this->hasOne('App\Conversation');
 	}
 
+
+
+
+
+
+
+
+
 }

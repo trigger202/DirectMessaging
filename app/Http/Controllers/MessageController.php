@@ -11,6 +11,13 @@ use App\User;
 
 class MessageController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,13 +47,13 @@ class MessageController extends Controller
     public function store(Request $request)
     {
 
-            $current_user_id = Auth::user()->id;;
+            $user = Auth::user();
 
 
             $conversation = new Conversation();
-            $conversation->user_one_id=$current_user_id;
+            $conversation->user_one_id=$user->id;
             $conversation->user_two_id=$request->friendid;
-            $conversation->save();
+            // $conversation->save();
 
             // dd($conversation->id);
             $message = new Message();
@@ -55,11 +62,17 @@ class MessageController extends Controller
             $message->message = $request->message;
             $message->conversation_id= $conversation->id;
 
-            $message->save();
+            // $message->save();
 
            $friends=  User::all()->except(Auth::id());
            $messageList = Message::all();
-           return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
+
+           var_dump($user->conversations->messages);
+           // var_dump($user->conversations);
+           dd();
+
+
+           // return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
 
 
 
