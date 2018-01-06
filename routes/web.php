@@ -16,6 +16,8 @@
 
 Route::get('/','HomeController@index' );
 Route::Post('/send','MessageController@store' );
+Route::get('/messages','MessageController@index' );
+
 
 Auth::routes();
 

@@ -8,12 +8,10 @@ class Message extends Model
 {
     //
 
-	// public function Conversation()
-	// {
-	// 	return $this->hasOne('App\Conversation');
-	// }
-
-
+	public function Conversation()
+	{
+		return $this->hasOne('App\Conversation');
+	}
 
 
 

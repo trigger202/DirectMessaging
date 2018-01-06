@@ -16,7 +16,9 @@ class CreateConversationsTable extends Migration
         Schema::create('conversations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_one_id')->foreign('user_one_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('user_two_id')->foreign('user_one_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_two_id')->foreign('user_two_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('message_id')->foreign('message_id')->references('id')->on('messages')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

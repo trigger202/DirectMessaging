@@ -32,6 +32,7 @@ class HomeController extends Controller
     {
 
 
+
        $friends=  User::all()->except(Auth::id());
        $messageList = Message::all();
         return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);

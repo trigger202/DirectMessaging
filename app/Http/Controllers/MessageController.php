@@ -14,10 +14,12 @@ use App\User;
 class MessageController extends Controller
 {
 
+    private $user ;
 
     public function __construct()
     {
         $this->middleware('auth');
+        $user= Auth::User();
 
     }
     /**
@@ -27,7 +29,12 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+         $user = Auth::user();   
+        // dd($user->conversations);
+         $list =$user->conversations;
+
+         dd($list);
+           
     }
 
     /**
@@ -37,7 +44,8 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        $user = $this->user;
+        
     }
 
     /**
@@ -49,29 +57,33 @@ class MessageController extends Controller
     public function store(Request $request)
     {
 
-            $user = Auth::user();
 
+
+
+         $user = Auth::user();   
+            // dd($conversation->id);
+            $message = new Message();
+            $message->message = $request->message;
+            $message->save();
 
             $conversation = new Conversation();
             $conversation->user_one_id=$user->id;
             $conversation->user_two_id=$request->friendid;
+            $conversation->message_id = $message->id;
             $conversation->save();
-
-            // dd($conversation->id);
-            $message = new Message();
-
-
-            $message->message = $request->message;
-            $message->conversation_id= $conversation->id;
-
-            $message->save();
 
            $friends=  User::all()->except(Auth::id());
 
-           $userConversationIDs = $user->conversations->pluck('id')->all();
+           $messageList = ($user->messages);
 
-           $messageList = DB::table('messages')->whereIn ('conversation_id', $userConversationIDs)->orderBy('created_at','desc')->get();
+            
+            foreach ($messageList   as $message) 
+            {
+                echo $message->message;
+           }           
 
+
+           exit();
            return view('message', ['friendsList'=>$friends, 'messageList'=>$messageList]);
 
 

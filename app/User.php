@@ -28,15 +28,14 @@ class User extends Authenticatable
     ];
 
 
+
     public function conversations()
     {
-        return $this->hasMany('App\conversation', 'user_one_id');
+        return $this->belongsToMany('App\conversation', 'conversations');
     }
 
-    // public function message()
-    // {
 
-    //     return $this->belongsToMany('App\Message', 'conversation_id');
-    // }
+
+
 
 }

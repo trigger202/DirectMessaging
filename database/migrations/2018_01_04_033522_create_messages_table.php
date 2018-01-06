@@ -15,7 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('conversation_id')->foreign('conversation_id')->references('conversations')->on('id')->onDelete('cascade');
+            // $table->integer('conversation_id')->foreign('conversation_id')->references('conversations')->on('id')->onDelete('cascade');
             $table->text('message');
             $table->boolean('message_read')->default(false);
             $table->timestamps();
